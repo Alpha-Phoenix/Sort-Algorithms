@@ -54,7 +54,7 @@ int* SortAlgotithms::InsertionSort(int *v, const int size) {
 }
 
 int* SortAlgotithms::QuickSort(int *v, const int size) {
-    return qsort(v, 0, size - 1);
+    return QSortHelper(v, 0, size - 1);
 }
 
 int* SortAlgotithms::MergeSort(int *v, const int size) {
