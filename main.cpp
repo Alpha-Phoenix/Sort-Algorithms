@@ -1,8 +1,9 @@
+#include <cstdlib>
+#include "sortalgotithms.h"
 #include <iostream>
 #include <ctime>
 #include <ratio>
 #include <chrono>
-#include "sortalgotithms.h"
 
 using namespace std;
 using namespace chrono;
@@ -25,19 +26,19 @@ double sort(int *v, int size, int* (*funtion)(int*, const int)) {
 }
 
 int main() {
-    int tam = 1e6;
-
+    int tam = 1e5; // tam = 10^7
     srand(time(NULL));
     int *v;
     v = (int*) malloc(sizeof(int) * tam);
     if (v == nullptr) {
-        cout << "Sem memoria" << endl;
+        cout << "Without memory!" << endl;
         exit(EXIT_FAILURE);
     }
 
     for (register int i = 0; i < tam; i++)
         v[i] = rand();
 
+    cout << "Sorting... Please Wait!" << endl;
     double duration = sort(v, tam, SortAlgotithms::QuickSort);
     cout << "End... Duration: " << duration << " seconds." << endl;
 
