@@ -1,49 +1,33 @@
-#ifndef MERGESORTHELPER_H
-#define MERGESORTHELPER_H
+#ifndef QSortHELPER_H
+#define QSortHELPER_H
 
-#include <cstdlib>
-#include <memory.h>
+int* QSortHelper (int *v, const int beg, const int end) {
+    register int i = beg;
+    register int j = end;
+    register int pivot = v[(i + j) / 2];
 
-void merge(int *v, int size) {
+    while (i < j) {
+        while (v[i] < pivot && i < end)
+            i++;
 
-    int middle = size / 2; // 7 8 (1) 2 3    middle = 2
-	                       //      ^
-    int v1Size = middle;   // v1Size = 2
-    int v2Size = size - v1Size; // v2Size = 3
+        while (v[j] > pivot && j > beg)
+            j--;
 
-    int *v2 = v + middle; // 7 8 1 2 3  v2 aponta para 1 = v[2]
-						  //     ^
-
-	//								             		   v v v
-	// Nesse ponto temos "2" vetores  7 8 <- v(original)   1 2 3 <- v2
-	//              				  ^ ^
-
-    int *temp = new int[size];
-    if (temp == nullptr)
-        exit(EXIT_FAILURE);
-
-    register int i = 0, j = 0, k = 0;
-
-    while (i < v1Size && j < v2Size) {
-        if (v[i] <= v2[j])
-            temp[k] = v[i++];
-        else
-            temp[k] = v2[j++];
-        k++;
+        if (i <= j) {
+            int swap = v[i];
+            v[i] = v[j];
+            v[j] = swap;
+            i++;
+            j--;
+        }
     }
 
-    if (i == v1Size) {
-        while (j < v2Size)
-            temp[k++] = v2[j++];
-    } else {
-        while (i < v1Size)
-            temp[k++] = v[i++];
-    }
+    if (i < end)
+        QSortHelper(v, i, end);
+    if (j > beg)
+        QSortHelper(v, beg, j);
 
-    for (register int i = 0; i < size; i++)
-        v[i] = temp[i];
-
-    delete [] temp;
+    return v;
 }
 
-#endif // MERGESORTHELPER_H
+#endif // QSortHELPER_H
