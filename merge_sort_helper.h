@@ -7,13 +7,13 @@
 void merge(int *v, int size) {
 
     int middle = size / 2; // 7 8 (1) 2 3    middle = 2
-	                       //      ^ 
+	                       //      ^
     int v1Size = middle;   // v1Size = 2
     int v2Size = size - v1Size; // v2Size = 3
 
     int *v2 = v + middle; // 7 8 1 2 3  v2 aponta para 1 = v[2]
 						  //     ^
-						  
+
 	//								             		   v v v
 	// Nesse ponto temos "2" vetores  7 8 <- v(original)   1 2 3 <- v2
 	//              				  ^ ^
